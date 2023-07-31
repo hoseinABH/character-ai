@@ -26,7 +26,7 @@ export const Navbar = () => {
               font.className
             )}
           >
-            character ai
+            character AI
           </h1>
         </Link>
       </div>

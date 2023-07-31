@@ -8,7 +8,7 @@ export const MobileSidebar = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Menu />
+        <Menu className="md:hidden block" />
       </SheetTrigger>
       <SheetContent side="left" className="p-0 bg-secondary pt-10 w-32">
         <Sidebar />

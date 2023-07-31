@@ -12,7 +12,7 @@ export const SearchInput = () => {
   const searchParams = useSearchParams();
 
   const categoryId = searchParams.get('categoryId');
-  const name = searchParams.get('name ');
+  const name = searchParams.get('name');
 
   const [value, setValue] = useState(name || '');
   const debouncedValue = useDebounce<string>(value, 500);
