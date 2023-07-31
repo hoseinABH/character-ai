@@ -1,1 +1,1 @@
-## Generate Characters using AI
+# Generate Characters using AI
