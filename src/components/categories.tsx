@@ -32,7 +32,10 @@ export const Categories = ({ data }: CategoriesProps) => {
   return (
     <div className="flex w-full overflow-x-auto space-x-2 p-1">
       <button
-        className={cn('category-button')}
+        className={cn(
+          'category-button',
+          !categoryId ? 'bg-primary/25' : 'bg-primary/10'
+        )}
         onClick={() => handleClick(undefined)}
       >
         Newest
@@ -40,7 +43,10 @@ export const Categories = ({ data }: CategoriesProps) => {
       {data.map((category) => (
         <button
           key={category.id}
-          className={cn('category-button')}
+          className={cn(
+            'category-button',
+            category.id === categoryId ? 'bg-primary/25' : 'bg-primary/10'
+          )}
           onClick={() => handleClick(category.id)}
         >
           {category.name}
