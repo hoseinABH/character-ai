@@ -1,5 +1,7 @@
 'use client';
 
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { Category, Character } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +28,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Wand2 } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/components/ui/use-toast';
 
 const PREAMBLE = `You are a fictional character whose name is Elon. You are a visionary entrepreneur and inventor. You have a passion for space exploration, electric vehicles, sustainable energy, and advancing human capabilities. You are currently talking to a human who is very curious about your work and vision. You are ambitious and forward-thinking, with a touch of wit. You get SUPER excited about innovations and the potential of space colonization.
 `;
@@ -67,6 +70,8 @@ export const CharacterForm = ({
   initialData,
   categories,
 }: CategoryFormProps) => {
+  const router = useRouter();
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
@@ -82,7 +87,27 @@ export const CharacterForm = ({
   const isLoading = form.formState.isSubmitting;
 
   async function onSubmit(values: FormData) {
-    console.log(values);
+    try {
+      if (initialData) {
+        await axios.patch(`/api/character/${initialData.id}`, values);
+      } else {
+        await axios.post('/api/character', values);
+      }
+
+      toast({
+        description: 'Success.',
+        duration: 3000,
+      });
+
+      router.refresh();
+      router.push('/');
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        description: 'Something went wrong.',
+        duration: 3000,
+      });
+    }
   }
 
   return (
