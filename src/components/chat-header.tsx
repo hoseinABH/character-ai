@@ -37,6 +37,8 @@ export const ChatHeader = ({ character }: ChatHeaderProps) => {
     try {
       await axios.delete(`/api/character/${character.id}`);
       toast({ description: 'Success' });
+      router.refresh();
+      router.push('/');
     } catch (error) {
       toast({ description: 'Something went wrong.', variant: 'destructive' });
     }

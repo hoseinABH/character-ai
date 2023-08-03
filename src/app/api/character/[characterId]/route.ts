@@ -64,7 +64,7 @@ export async function DELETE(
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    const deletedCharacter = prismadb.character.delete({
+    const deletedCharacter = await prismadb.character.delete({
       where: {
         id: params.characterId,
         userId,
