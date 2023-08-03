@@ -40,6 +40,7 @@ export const ClientChat = ({ character }: ClientChatProps) => {
     });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    if (!input.trim().length) return;
     const userMessage: ChatMessageProps = {
       role: 'user',
       content: input,
